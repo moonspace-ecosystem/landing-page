@@ -4,28 +4,43 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "bunx --bun vite",
-    "build": "bunx --bun vite build",
-    "preview": "bunx --bun vite preview",
-    "typecheck": "bunx --bun tsc --noEmit"
+    "dev": "npm run build && tsx server.ts",
+    "dev:vite": "vite --mode ssr",
+    "build": "npm run build.sw && qwik build",
+    "build.client": "vite build",
+    "build.preview": "vite build --ssr src/entry.preview.tsx",
+    "build.server": "vite build -c adapters/static/vite.config.ts",
+    "build.types": "tsc --noEmit",
+    "build.sw": "tsc public/service-worker.ts --target ES2020 --lib webworker --outDir public --declaration false --skipLibCheck",
+    "preview": "qwik build preview && vite preview --open",
+    "start": "vite --open --mode ssr",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@effect/data": "^0.18.7",
-    "@effect/io": "^0.40.0",
-    "@effect/schema": "^0.36.0",
-    "effect": "^2.0.0-next.55",
-    "lucide-react": "^0.263.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@builder.io/qwik": "^1.5.7",
+    "@builder.io/qwik-city": "^1.14.1",
+    "dotenv": "^17.2.2",
+    "jose": "^6.0.11",
+    "semver": "^7.7.2"
   },
   "devDependencies": {
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.3",
+    "@types/eslint": "^8.56.10",
+    "@types/node": "^20.12.7",
+    "@types/tailwindcss": "^3.0.11",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
     "autoprefixer": "^10.4.14",
+    "eslint": "^8.57.0",
+    "eslint-plugin-qwik": "^1.5.7",
     "postcss": "^8.4.27",
+    "postcss-load-config": "^6.0.1",
+    "prettier": "^3.2.5",
     "tailwindcss": "^3.3.3",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "undici": "^5.28.4",
+    "vite": "^5.2.10",
+    "vite-tsconfig-paths": "^4.2.1"
   }
 }
