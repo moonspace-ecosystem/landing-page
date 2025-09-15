@@ -223,7 +223,7 @@ export const EarlyAccessForm = component$(() => {
                 </div>
 
                 <div>
-                  <label class="block text-white font-medium mb-2">Investment Interest (Optional)</label>
+                  <label class="block text-white font-medium mb-2">Investment Interest</label>
                   <select
                     value={investment.value}
                     onChange$={(e) => { investment.value = (e.target as HTMLSelectElement).value; }}
@@ -239,7 +239,7 @@ export const EarlyAccessForm = component$(() => {
 
                 {/* Crypto Donation Verification Section */}
                 <div class="border-t border-white/10 pt-6">
-                  <h4 class="text-lg font-semibold text-white mb-4">Crypto Donation Verification (Optional)</h4>
+                  <h4 class="text-lg font-semibold text-white mb-4">Crypto Donation Verification</h4>
                   <p class="text-gray-400 text-sm mb-4">
                     If you've made a donation via USDC or USDT, please provide transaction details for verification and acknowledgment.
                   </p>
