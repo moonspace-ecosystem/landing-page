@@ -55,11 +55,11 @@ export function calculateFundingProgress(
   config: AppConfig,
   validatedDonations: number
 ): FundingData {
-  // Parse funding target - handle range format like "$800K - $1.2M"
-  let fundingTarget = 1200000; // Default to $1.2M (upper range of "$800K - $1.2M")
+  // Parse funding target - handle range format like "$800K - $10M"
+  let fundingTarget = 10000000; // Default to $10M (upper range of "$800K - $10M")
 
   if (config.FUNDING_TARGET.includes(' - ')) {
-    // Handle range format "$800K - $1.2M" - use upper bound
+    // Handle range format "$800K - $10M" - use upper bound
     const upperBound = config.FUNDING_TARGET.split(' - ')[1];
     if (upperBound.includes('M')) {
       const num = parseFloat(upperBound.replace(/[\$M]/g, ''));
@@ -71,7 +71,7 @@ export function calculateFundingProgress(
   } else {
     // Handle simple format like "$500,000"
     const fundingTargetStr = config.FUNDING_TARGET.replace(/[\$,]/g, '');
-    fundingTarget = parseFloat(fundingTargetStr) || 1200000;
+    fundingTarget = parseFloat(fundingTargetStr) || 10000000;
   }
 
   // Current funding = ONLY validated donations from Google Sheets
