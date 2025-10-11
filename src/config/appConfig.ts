@@ -25,7 +25,7 @@ const getConfig = (): AppConfig => {
     // Business configuration
     COMPANY_NAME: import.meta.env.VITE_COMPANY_NAME || 'DePIN Document Registry',
     COMPANY_TAGLINE: import.meta.env.VITE_COMPANY_TAGLINE || 'Revolutionizing Corporate Transparency',
-    FUNDING_TARGET: import.meta.env.VITE_FUNDING_TARGET || '$800K - $1.2M',
+    FUNDING_TARGET: import.meta.env.VITE_FUNDING_TARGET || '$800K - $10M',
     CURRENT_FUNDING: import.meta.env.VITE_CURRENT_FUNDING || '$0',
     
     // Contact and support
