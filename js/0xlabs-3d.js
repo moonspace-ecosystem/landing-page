@@ -10,8 +10,8 @@
   const canvas = document.createElement('canvas');
   canvas.width = 512;
   canvas.height = 512;
-  // Render at 256px then scale to 64px (0.25) — object naturally centers in Spline
-  canvas.style.cssText = 'width:256px;height:256px;display:block;transform-origin:0 0;transform:scale(0.25);pointer-events:none;';
+  // Render at 160px CSS, scale to ~64px = scale(0.4), center with absolute + translate
+  canvas.style.cssText = 'width:160px;height:160px;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.4);pointer-events:none;';
   wrapper.appendChild(canvas);
 
   el.parentNode.replaceChild(wrapper, el);
