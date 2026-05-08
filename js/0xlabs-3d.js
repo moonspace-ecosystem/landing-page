@@ -1,15 +1,14 @@
-/* 0xLabs 3D Logo — Spline Runtime (centered programmatically) */
+/* 0xLabs 3D Logo — Spline Runtime (centered programmatically via Camera & Object) */
 (function () {
   const el = document.getElementById('oxlabs-3d');
   if (!el) return;
 
   const wrapper = document.createElement('div');
   wrapper.id = 'oxlabs-3d';
-  // Use a standard 64x64 container, no overflow hack needed if we center it in 3D
-  wrapper.style.cssText = 'width:64px;height:64px;position:relative;border-radius:12px;flex-shrink:0;';
+  wrapper.style.cssText = 'width:64px;height:64px;position:relative;border-radius:12px;flex-shrink:0;overflow:hidden;background:#1a1a2e;';
 
   const canvas = document.createElement('canvas');
-  // Render slightly larger for retina, then scale down using CSS for crispness
+  // Make the canvas fill the wrapper. Spline will adjust its camera aspect ratio.
   canvas.style.cssText = 'width:100%;height:100%;display:block;outline:none;';
   wrapper.appendChild(canvas);
 
@@ -23,26 +22,31 @@
     const app = new Application(c);
     
     app.load('/assets/0xlabs-scene.splinecode').then(() => {
-      // Find the main 3D object (in Spline it's named 'Cube 2')
+      // Find all objects
       const objects = app.getObjects();
-      const crossObj = objects.find(o => o.name === 'Cube 2' || o.type === 'Mesh');
       
+      // The 3D cross shape might be named 'Cube 2' or 'Shape'
+      const crossObj = objects.find(o => o.name === 'Cube 2' || o.type === 'Mesh');
       if (crossObj) {
-        // Move it perfectly to the center of the 3D world (0, 0, 0)
+        // Try to center it in world space
         crossObj.position.x = 0;
         crossObj.position.y = 0;
-        crossObj.position.z = 0;
-        
-        // Optional: you can even adjust its scale if it's too big/small
-        // crossObj.scale.set(0.8, 0.8, 0.8);
       }
-      
-      // Also shift the camera slightly if needed, but centering the object usually fixes it
+
+      // Spline scenes often have a camera that is panned or zoomed strangely.
+      // Let's reset the active camera's position to look straight at the origin.
       if (app._camera) {
+        // A typical perspective camera setup:
         app._camera.position.x = 0;
         app._camera.position.y = 0;
-        // Keep Z distance
+        // Keep the existing Z (distance to object) or set a reasonable one
+        if (app._camera.position.z > 2000 || app._camera.position.z < 10) {
+            app._camera.position.z = 800; // default safe distance
+        }
       }
+      
+      // If we want to adjust the zoom dynamically to fit the 64x64 box
+      app.setZoom(0.8); // Zoom out slightly to ensure it's not cut off
     });
   `;
   document.body.appendChild(mod);
