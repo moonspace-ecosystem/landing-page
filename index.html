@@ -111,7 +111,7 @@
       <div class="fade-in fade-in-delay-4" style="margin-top: 64px; text-align: center;">
         <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); display: block; margin-bottom: 16px;">Strategic Advisor & Web3 Grant Partner</span>
         <a href="https://www.0xlabs.tech/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 16px; padding: 16px 32px; border-radius: var(--radius-full); background: var(--bg-glass); border: 1px solid var(--border-glass); transition: all 0.3s; text-decoration: none;" onmouseover="this.style.borderColor='var(--purple-500)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
-          <img src="assets/0xlabs-logo.png" alt="0xLabs" style="height: 32px; border-radius: 4px;" class="logo-3d-anim" onerror="this.outerHTML='<div style=\'font-size: 1.5rem; font-weight: 800; background: linear-gradient(135deg, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: var(--font-mono); letter-spacing: -1px;\'>0xLabs</div>';" />
+          <video src="assets/0xlabs-3d-logo.webm" autoplay loop muted playsinline style="height: 48px; border-radius: 8px; margin: -8px 0; mix-blend-mode: screen;" class="logo-3d-anim"></video>
           <div style="width: 1px; height: 24px; background: var(--border-glass);"></div>
           <div style="text-align: left;">
             <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary);">Web3 Grants & Strategy</div>
@@ -403,5 +403,14 @@
 </div><!-- /content-wrapper -->
 
 <script src="js/main.js"></script>
+  <!-- Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script>
+    const lenis = new Lenis({
+      autoRaf: true,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+    });
+  </script>
 </body>
 </html>
