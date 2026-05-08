@@ -1,4 +1,4 @@
-/* 0xLabs 3D Logo — Three.js Concrete Cross */
+/* 0xLabs 3D Logo — Metaball Marching Cubes */
 (function () {
   if (!document.getElementById('oxlabs-3d')) return;
 
@@ -6,11 +6,12 @@
   mod.type = 'module';
   mod.textContent = `
     import * as THREE from 'https://unpkg.com/three@0.164.1/build/three.module.js';
+    import { MarchingCubes } from 'https://unpkg.com/three@0.164.1/examples/jsm/objects/MarchingCubes.js';
 
     const el = document.getElementById('oxlabs-3d');
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
-    camera.position.set(4.5, 3.5, 5);
+    const camera = new THREE.PerspectiveCamera(26, 1, 0.1, 100);
+    camera.position.set(0, 0, 5.5);
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -18,100 +19,113 @@
     renderer.setPixelRatio(2);
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.95;
+    renderer.toneMappingExposure = 1.0;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
     const cv = renderer.domElement;
     cv.style.width = '64px';
     cv.style.height = '64px';
     cv.style.borderRadius = '12px';
     el.appendChild(cv);
 
-    // Concrete matte material — cool lavender-gray
-    const mat = new THREE.MeshStandardMaterial({
-      color: 0xb5adc2,
-      roughness: 0.88,
-      metalness: 0.02,
+    // Concrete matte material
+    const mat = new THREE.MeshPhysicalMaterial({
+      color: 0xb8b0c5,
+      roughness: 0.85,
+      metalness: 0.0,
+      clearcoat: 0.05,
+      clearcoatRoughness: 0.9,
     });
 
-    // Dimensions: arm diameter ~45% of total length → very thick stubby arms
-    const R = 0.42;       // arm radius (thick)
-    const halfL = 0.52;   // half arm length from center (short & stubby)
-    const seg = 48;
+    // Marching Cubes for smooth metaball blending
+    const resolution = 48;
+    const mc = new MarchingCubes(resolution, mat, true, true, 50000);
+    mc.position.set(0, 0, 0);
+    mc.scale.set(1.5, 1.5, 1.5);
+    mc.isolation = 80;
+    mc.enableUvs = false;
+    mc.enableColors = false;
 
-    const cross = new THREE.Group();
+    // Place metaballs along 6 arms to form a cross
+    function updateBalls(time) {
+      mc.reset();
 
-    // Build each arm as cylinder + hemisphere cap at the tip
-    function addArm(dir) {
-      const g = new THREE.Group();
+      const strength = 1.2;
+      const subtract = 12;
+      const armLen = 0.18;
 
-      // Cylinder body
-      const cyl = new THREE.Mesh(
-        new THREE.CylinderGeometry(R, R, halfL * 2, seg, 1, true),
-        mat
-      );
-      g.add(cyl);
+      // Center ball (larger, acts as junction)
+      mc.addBall(0.5, 0.5, 0.5, strength * 1.1, subtract);
 
-      // Rounded tip (hemisphere)
-      const cap = new THREE.Mesh(
-        new THREE.SphereGeometry(R, seg, seg / 2, 0, Math.PI * 2, 0, Math.PI / 2),
-        mat
-      );
-      cap.position.y = halfL;
-      g.add(cap);
+      // 6 arms: +X, -X, +Y, -Y, +Z, -Z
+      // Each arm has 3 balls along its length for smooth taper
+      const dirs = [
+        [1,0,0], [-1,0,0],
+        [0,1,0], [0,-1,0],
+        [0,0,1], [0,0,-1]
+      ];
 
-      // Bottom is hidden inside center sphere, no cap needed
-
-      // Orient to correct axis
-      if (dir === 'x+') g.rotation.z = -Math.PI / 2;
-      if (dir === 'x-') g.rotation.z = Math.PI / 2;
-      if (dir === 'y+') { /* default up */ }
-      if (dir === 'y-') g.rotation.z = Math.PI;
-      if (dir === 'z+') g.rotation.x = Math.PI / 2;
-      if (dir === 'z-') g.rotation.x = -Math.PI / 2;
-
-      cross.add(g);
+      for (const [dx, dy, dz] of dirs) {
+        // Inner ball (close to center, blends with junction)
+        mc.addBall(
+          0.5 + dx * armLen * 0.4,
+          0.5 + dy * armLen * 0.4,
+          0.5 + dz * armLen * 0.4,
+          strength * 0.85, subtract
+        );
+        // Middle ball
+        mc.addBall(
+          0.5 + dx * armLen * 0.75,
+          0.5 + dy * armLen * 0.75,
+          0.5 + dz * armLen * 0.75,
+          strength * 0.7, subtract
+        );
+        // Tip ball (slightly smaller for rounded end)
+        mc.addBall(
+          0.5 + dx * armLen,
+          0.5 + dy * armLen,
+          0.5 + dz * armLen,
+          strength * 0.55, subtract
+        );
+      }
     }
 
-    // 6 arms along ±X, ±Y, ±Z
-    ['x+','x-','y+','y-','z+','z-'].forEach(addArm);
+    updateBalls(0);
 
-    // Large center sphere for organic metaball-like blending
-    const centerSphere = new THREE.Mesh(
-      new THREE.SphereGeometry(R * 1.35, seg, seg),
-      mat
-    );
-    cross.add(centerSphere);
+    // Wrap in group for rotation
+    const group = new THREE.Group();
+    group.add(mc);
+    // Tilt to match Spline's default viewing angle
+    group.rotation.x = 0.35;
+    group.rotation.z = 0.15;
+    scene.add(group);
 
-    scene.add(cross);
+    // Studio lighting — purple/blue tones matching Spline
+    scene.add(new THREE.AmbientLight(0x9898b0, 0.6));
 
-    // Lighting — matching Spline's purple studio setup
-    // Soft ambient with lavender tint
-    scene.add(new THREE.AmbientLight(0xa0a0b8, 0.5));
+    // Main key light — warm white from upper right
+    const key = new THREE.DirectionalLight(0xfff5ee, 1.8);
+    key.position.set(5, 8, 5);
+    scene.add(key);
 
-    // Main light: top-right, warm white
-    const mainL = new THREE.DirectionalLight(0xfff8f0, 1.6);
-    mainL.position.set(5, 7, 4);
-    scene.add(mainL);
-
-    // Purple/magenta accent from upper-right (key Spline characteristic)
-    const purpleL = new THREE.DirectionalLight(0x9966cc, 1.0);
-    purpleL.position.set(3, 4, -2);
-    scene.add(purpleL);
+    // Purple accent — signature Spline look
+    const purple = new THREE.DirectionalLight(0x8855bb, 1.2);
+    purple.position.set(2, 3, -4);
+    scene.add(purple);
 
     // Cool blue fill from left
-    const blueL = new THREE.DirectionalLight(0x5588bb, 0.5);
-    blueL.position.set(-5, 0, 3);
-    scene.add(blueL);
+    const blue = new THREE.DirectionalLight(0x5580bb, 0.6);
+    blue.position.set(-6, 1, 3);
+    scene.add(blue);
 
-    // Subtle rim light from below for depth
-    const rimL = new THREE.DirectionalLight(0x7755aa, 0.3);
-    rimL.position.set(0, -5, -3);
-    scene.add(rimL);
+    // Subtle bottom fill
+    const bottom = new THREE.DirectionalLight(0x6655aa, 0.3);
+    bottom.position.set(0, -5, 0);
+    scene.add(bottom);
 
-    // Slow diagonal rotation matching Spline animation
+    // Animate — slow diagonal rotation
     (function animate() {
       requestAnimationFrame(animate);
-      cross.rotation.y += 0.005;
-      cross.rotation.x += 0.002;
+      group.rotation.y += 0.004;
       renderer.render(scene, camera);
     })();
   `;
