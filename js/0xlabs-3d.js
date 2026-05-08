@@ -13,7 +13,7 @@
   // Canvas at 120px CSS. Object center at ~70% left (84px), ~48% top (58px).
   // To center in 56px container: left = 28 - 84 = -56, top = 28 - 58 = -30
   // Then scale(0.5) from center to fit: effective visible area = 56/0.5 = 112px of 120px
-  canvas.style.cssText = 'width:120px;height:120px;display:block;position:absolute;top:-2px;left:-40px;pointer-events:none;';
+  canvas.style.cssText = 'width:120px;height:120px;display:block;position:absolute;top:-2px;left:-52px;pointer-events:none;';
   wrapper.appendChild(canvas);
 
   el.parentNode.replaceChild(wrapper, el);
