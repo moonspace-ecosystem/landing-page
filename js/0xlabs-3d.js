@@ -9,10 +9,8 @@
   const canvas = document.createElement('canvas');
   canvas.width = 400;
   canvas.height = 400;
-  // Object sits at ~70% from left in Spline scene (140px of 200px CSS)
-  // Center of 64px viewport = 32px → left offset = -(140 - 32) = -108
-  // Object sits at ~45% from top (90px of 200px) → top = -(90 - 32) = -58
-  canvas.style.cssText = 'width:200px;height:200px;display:block;position:absolute;top:-58px;left:-108px;pointer-events:none;';
+  // Start at 0,0 — let the logo show wherever it naturally falls
+  canvas.style.cssText = 'width:200px;height:200px;display:block;position:absolute;top:0px;left:0px;pointer-events:none;';
   wrapper.appendChild(canvas);
 
   el.parentNode.replaceChild(wrapper, el);
