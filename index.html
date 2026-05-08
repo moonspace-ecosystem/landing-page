@@ -111,9 +111,7 @@
       <div class="fade-in fade-in-delay-4" style="margin-top: 64px; text-align: center;">
         <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); display: block; margin-bottom: 16px;">Strategic Advisor & Web3 Grant Partner</span>
         <a href="https://www.0xlabs.tech/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 16px; padding: 16px 32px; border-radius: var(--radius-full); background: var(--bg-glass); border: 1px solid var(--border-glass); transition: all 0.3s; text-decoration: none;" onmouseover="this.style.borderColor='var(--purple-500)'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='var(--border-glass)'; this.style.transform='translateY(0)';">
-          <div style="width: 56px; height: 56px; border-radius: 12px; overflow: hidden; position: relative; flex-shrink: 0;">
-            <iframe src="https://my.spline.design/neEMPqNv-jfRsJzJZGEtrA32/" style="position: absolute; width: 500px; height: 500px; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.112); transform-origin: center center; border: none; pointer-events: none;" loading="lazy" fetchpriority="auto" referrerpolicy="no-referrer" sandbox="allow-same-origin allow-scripts allow-downloads allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" allowfullscreen="" allow="presentation; fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; clipboard-write"></iframe>
-          </div>
+          <spline-viewer url="https://my.spline.design/neEMPqNv-jfRsJzJZGEtrA32/" style="width: 56px; height: 56px; border-radius: 12px; flex-shrink: 0; pointer-events: none;" loading="lazy"></spline-viewer>
           <div style="width: 1px; height: 24px; background: var(--border-glass);"></div>
           <div style="text-align: left;">
             <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-primary);">Web3 Grants & Strategy</div>
@@ -404,6 +402,7 @@
 
 </div><!-- /content-wrapper -->
 
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.82/build/spline-viewer.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
