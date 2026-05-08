@@ -1,4 +1,4 @@
-/* 0xLabs 3D Logo — Spline Runtime (Large canvas + CSS transform) */
+/* 0xLabs 3D Logo — Spline Runtime (Large canvas + CSS offset) */
 (function () {
   const el = document.getElementById('oxlabs-3d');
   if (!el) return;
@@ -8,17 +8,16 @@
   wrapper.style.cssText = 'width:64px;height:64px;overflow:hidden;position:relative;border-radius:12px;flex-shrink:0;';
 
   const canvas = document.createElement('canvas');
-  // 400x400 logical size for high res
-  canvas.width = 400;
-  canvas.height = 400;
+  // High-res rendering buffer
+  canvas.width = 1024;
+  canvas.height = 1024;
   
-  // Render at 300px CSS to give plenty of room so WebGL doesn't clip it internally.
-  // Object is at ~70% left = 210px. ~45% top = 135px.
-  // With scale(0.35) -> object is at 210 * 0.35 = 73.5px X, and 135 * 0.35 = 47.25px Y.
-  // To center in 64px (target 32px):
-  // left = 32 - 73.5 = -41.5px
-  // top = 32 - 47.25 = -15.25px
-  canvas.style.cssText = 'width:300px;height:300px;display:block;position:absolute;top:-15px;left:-42px;transform-origin:0 0;transform:scale(0.35);pointer-events:none;';
+  // Use a very large logical CSS canvas (800x800) so its edges extend far past the 64px wrapper.
+  // This completely eliminates the "cut off" issue caused by the canvas borders.
+  // With scale(0.25), the visual size is 200x200.
+  // The object sits roughly at X=70%, Y=45% in Spline.
+  // left: -10% and top: 65% counter-acts this offset to perfectly center it in the 64px box.
+  canvas.style.cssText = 'width:800px;height:800px;display:block;position:absolute;top:65%;left:-10%;transform:translate(-50%,-50%) scale(0.25);pointer-events:none;';
   wrapper.appendChild(canvas);
 
   el.parentNode.replaceChild(wrapper, el);
