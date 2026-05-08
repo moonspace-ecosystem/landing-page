@@ -1,88 +1,117 @@
-/* 0xLabs 3D Logo — Three.js Metaball Cross Recreation */
+/* 0xLabs 3D Logo — Three.js Concrete Cross */
 (function () {
-  const container = document.getElementById('oxlabs-3d');
-  if (!container) return;
+  if (!document.getElementById('oxlabs-3d')) return;
 
   const mod = document.createElement('script');
   mod.type = 'module';
   mod.textContent = `
     import * as THREE from 'https://unpkg.com/three@0.164.1/build/three.module.js';
 
-    const W = 64, H = 64;
     const el = document.getElementById('oxlabs-3d');
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
-    camera.position.set(4, 3, 5);
+    camera.position.set(4.5, 3.5, 5);
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(W * 2, H * 2);
+    renderer.setSize(128, 128);
     renderer.setPixelRatio(2);
     renderer.setClearColor(0x000000, 0);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.0;
-    const c = renderer.domElement;
-    c.style.width = W + 'px';
-    c.style.height = H + 'px';
-    c.style.borderRadius = '12px';
-    el.appendChild(c);
+    renderer.toneMappingExposure = 0.95;
+    const cv = renderer.domElement;
+    cv.style.width = '64px';
+    cv.style.height = '64px';
+    cv.style.borderRadius = '12px';
+    el.appendChild(cv);
 
-    // Concrete material
+    // Concrete matte material — cool lavender-gray
     const mat = new THREE.MeshStandardMaterial({
-      color: 0xb0a8be,
-      roughness: 0.82,
-      metalness: 0.05,
+      color: 0xb5adc2,
+      roughness: 0.88,
+      metalness: 0.02,
     });
 
-    // Build cross using thick cylinders with hemisphere caps (metaball-like)
-    const R = 0.38, L = 1.1, seg = 48;
+    // Dimensions: arm diameter ~45% of total length → very thick stubby arms
+    const R = 0.42;       // arm radius (thick)
+    const halfL = 0.52;   // half arm length from center (short & stubby)
+    const seg = 48;
+
     const cross = new THREE.Group();
 
-    function arm(axis) {
-      // Thick cylinder body
-      const cyl = new THREE.Mesh(new THREE.CylinderGeometry(R, R, L, seg, 1, false), mat);
-      // Hemisphere caps
-      const capGeo = new THREE.SphereGeometry(R, seg, seg, 0, Math.PI * 2, 0, Math.PI / 2);
-      const topCap = new THREE.Mesh(capGeo, mat);
-      topCap.position.y = L / 2;
-      const botCap = new THREE.Mesh(capGeo, mat);
-      botCap.position.y = -L / 2;
-      botCap.rotation.x = Math.PI;
-
+    // Build each arm as cylinder + hemisphere cap at the tip
+    function addArm(dir) {
       const g = new THREE.Group();
-      g.add(cyl, topCap, botCap);
 
-      if (axis === 'x') g.rotation.z = Math.PI / 2;
-      if (axis === 'z') g.rotation.x = Math.PI / 2;
-      return g;
+      // Cylinder body
+      const cyl = new THREE.Mesh(
+        new THREE.CylinderGeometry(R, R, halfL * 2, seg, 1, true),
+        mat
+      );
+      g.add(cyl);
+
+      // Rounded tip (hemisphere)
+      const cap = new THREE.Mesh(
+        new THREE.SphereGeometry(R, seg, seg / 2, 0, Math.PI * 2, 0, Math.PI / 2),
+        mat
+      );
+      cap.position.y = halfL;
+      g.add(cap);
+
+      // Bottom is hidden inside center sphere, no cap needed
+
+      // Orient to correct axis
+      if (dir === 'x+') g.rotation.z = -Math.PI / 2;
+      if (dir === 'x-') g.rotation.z = Math.PI / 2;
+      if (dir === 'y+') { /* default up */ }
+      if (dir === 'y-') g.rotation.z = Math.PI;
+      if (dir === 'z+') g.rotation.x = Math.PI / 2;
+      if (dir === 'z-') g.rotation.x = -Math.PI / 2;
+
+      cross.add(g);
     }
 
-    cross.add(arm('y'), arm('x'), arm('z'));
+    // 6 arms along ±X, ±Y, ±Z
+    ['x+','x-','y+','y-','z+','z-'].forEach(addArm);
 
-    // Smooth center sphere (larger to blend arms like metaball)
-    cross.add(new THREE.Mesh(new THREE.SphereGeometry(R * 1.25, seg, seg), mat));
+    // Large center sphere for organic metaball-like blending
+    const centerSphere = new THREE.Mesh(
+      new THREE.SphereGeometry(R * 1.35, seg, seg),
+      mat
+    );
+    cross.add(centerSphere);
 
     scene.add(cross);
 
-    // Lighting to match Spline's purple-blue tones
-    scene.add(new THREE.AmbientLight(0x9090a8, 0.7));
+    // Lighting — matching Spline's purple studio setup
+    // Soft ambient with lavender tint
+    scene.add(new THREE.AmbientLight(0xa0a0b8, 0.5));
 
-    const main = new THREE.DirectionalLight(0xffffff, 1.5);
-    main.position.set(4, 6, 5);
-    scene.add(main);
+    // Main light: top-right, warm white
+    const mainL = new THREE.DirectionalLight(0xfff8f0, 1.6);
+    mainL.position.set(5, 7, 4);
+    scene.add(mainL);
 
-    const purple = new THREE.DirectionalLight(0x8866bb, 0.8);
-    purple.position.set(-4, -2, 3);
-    scene.add(purple);
+    // Purple/magenta accent from upper-right (key Spline characteristic)
+    const purpleL = new THREE.DirectionalLight(0x9966cc, 1.0);
+    purpleL.position.set(3, 4, -2);
+    scene.add(purpleL);
 
-    const blue = new THREE.DirectionalLight(0x4488cc, 0.3);
-    blue.position.set(2, -4, -4);
-    scene.add(blue);
+    // Cool blue fill from left
+    const blueL = new THREE.DirectionalLight(0x5588bb, 0.5);
+    blueL.position.set(-5, 0, 3);
+    scene.add(blueL);
 
+    // Subtle rim light from below for depth
+    const rimL = new THREE.DirectionalLight(0x7755aa, 0.3);
+    rimL.position.set(0, -5, -3);
+    scene.add(rimL);
+
+    // Slow diagonal rotation matching Spline animation
     (function animate() {
       requestAnimationFrame(animate);
-      cross.rotation.y += 0.006;
-      cross.rotation.x += 0.003;
+      cross.rotation.y += 0.005;
+      cross.rotation.x += 0.002;
       renderer.render(scene, camera);
     })();
   `;
