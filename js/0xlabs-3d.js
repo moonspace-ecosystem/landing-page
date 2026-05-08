@@ -11,7 +11,7 @@
   canvas.width = 512;
   canvas.height = 512;
   // Render at 160px CSS, scale to ~64px = scale(0.4), center with absolute + translate
-  canvas.style.cssText = 'width:160px;height:160px;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.4);pointer-events:none;';
+  canvas.style.cssText = 'width:160px;height:160px;display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0.55);pointer-events:none;';
   wrapper.appendChild(canvas);
 
   el.parentNode.replaceChild(wrapper, el);
