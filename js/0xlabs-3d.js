@@ -5,13 +5,15 @@
 
   const wrapper = document.createElement('div');
   wrapper.id = 'oxlabs-3d';
-  wrapper.style.cssText = 'width:64px;height:64px;overflow:hidden;position:relative;border-radius:12px;flex-shrink:0;';
+  wrapper.style.cssText = 'width:56px;height:56px;overflow:hidden;position:relative;border-radius:12px;flex-shrink:0;';
 
   const canvas = document.createElement('canvas');
   canvas.width = 512;
   canvas.height = 512;
-  // Render at 160px CSS, scale to ~64px = scale(0.4), center with absolute + translate
-  canvas.style.cssText = 'width:160px;height:160px;display:block;position:absolute;top:50%;left:calc(50% - 18px);transform:translate(-50%,-50%) scale(0.55);pointer-events:none;';
+  // Canvas at 120px CSS. Object center at ~70% left (84px), ~48% top (58px).
+  // To center in 56px container: left = 28 - 84 = -56, top = 28 - 58 = -30
+  // Then scale(0.5) from center to fit: effective visible area = 56/0.5 = 112px of 120px
+  canvas.style.cssText = 'width:120px;height:120px;display:block;position:absolute;top:-2px;left:-40px;pointer-events:none;';
   wrapper.appendChild(canvas);
 
   el.parentNode.replaceChild(wrapper, el);
