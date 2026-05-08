@@ -1,14 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Moonspace | Financial Intelligence Platform</title>
-    <!--
-      Qwik will optimize and render this page during development and build.
-      The head section will be replaced with dynamic content from router-head component.
-    -->
-  </head>
-  <body>
-    <!--qwik-->
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infinite Agent Labs — The Compute Layer for the AI Era</title>
+  <meta name="description" content="Centralized compute, decentralized storage, one token to power it all. Infinite Agent Labs builds the infrastructure and AI toolkit for the next era of intelligent applications." />
+  <meta name="keywords" content="AI, Web3, compute, decentralized storage, tokenomics, AI agents, enterprise AI, distributed computing" />
+  <meta property="og:title" content="Infinite Agent Labs — The Compute Layer for the AI Era" />
+  <meta property="og:description" content="Centralized compute, decentralized storage, one token to power it all." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://infiniteagentlabs.com" />
+  <meta property="og:image" content="https://infiniteagentlabs.com/assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Infinite Agent Labs — The Compute Layer for the AI Era" />
+  <meta name="twitter:description" content="Centralized compute, decentralized storage, one token to power it all." />
+  <meta name="twitter:image" content="https://infiniteagentlabs.com/assets/og-image.jpg" />
+  <link rel="canonical" href="https://infiniteagentlabs.com/" />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Infinite Agent Labs",
+    "url": "https://infiniteagentlabs.com",
+    "logo": "https://infiniteagentlabs.com/assets/logo.png",
+    "description": "Centralized compute, decentralized storage, one token to power it all."
+  }
+  </script>
+</head>
+<body>
+
+<!-- Background -->
+<canvas id="bg-canvas"></canvas>
+<div class="bg-gradient-overlay"></div>
+
+<div class="content-wrapper">
+
+  <!-- ════════ NAVBAR ════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-brand">
+        <img src="assets/logo.png" alt="Infinite Agent Labs" class="nav-logo" />
+        <div class="nav-brand-text">
+          <span class="nav-brand-title">Infinite Agent Labs</span>
+          <span>Web3 × AI Infrastructure</span>
+        </div>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#vision">Vision</a>
+        <a href="#ecosystem">Ecosystem</a>
+        <a href="#technology">Technology</a>
+        <a href="#tokenomics">Tokenomics</a>
+        <a href="#contact" class="nav-cta">Contact Us</a>
+      </div>
+      <div class="nav-toggle" id="nav-toggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <main>
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-badge fade-in">
+        <span class="pulse"></span>
+        Building in Public — Round 1 Open
+      </div>
+
+      <h1 class="fade-in">
+        The <span class="text-shimmer">Compute Layer</span><br />for the AI Era
+      </h1>
+
+      <p class="fade-in fade-in-delay-1">
+        Centralized compute. Decentralized storage. One token to power it all.<br />
+        We build the infrastructure and AI toolkit for the next generation of intelligent applications.
+      </p>
+
+      <div class="hero-cta fade-in fade-in-delay-2">
+        <a href="mailto:office@infiniteagentlabs.com" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Get in Touch
+        </a>
+        <a href="#ecosystem" class="btn-secondary">
+          Explore Ecosystem →
+        </a>
+      </div>
+
+      <div class="hero-metrics fade-in fade-in-delay-3">
+        <div class="metric">
+          <div class="metric-value text-gradient" data-count="5" data-suffix="+">0</div>
+          <div class="metric-label">Products</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value text-gradient" data-count="6" data-suffix="">0</div>
+          <div class="metric-label">AI Models Integrated</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value text-gradient-warm" data-count="15" data-suffix="">0</div>
+          <div class="metric-label">Languages Served</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value text-gradient" data-count="100" data-prefix="" data-suffix="%">0</div>
+          <div class="metric-label">Asset-Backed Token</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ VISION ════════ -->
+  <section class="section section-alt" id="vision">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-label">Our Thesis</div>
+        <h2 class="section-title">AI Tokenization Is the <span class="text-gradient">New Asset Class</span></h2>
+        <p class="section-subtitle">
+          In the era of AI explosion, compute tokens become the new digital asset. Whoever masters the optimization of compute and storage creates the next platform economy.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card fade-in">
+          <div class="card-icon purple">⚡</div>
+          <h3>Compute Is the New Oil</h3>
+          <p>AI inference and training demand exponential compute. We centralize compute for efficiency while keeping storage decentralized for resilience and ownership.</p>
+        </div>
+        <div class="card fade-in fade-in-delay-1">
+          <div class="card-icon cyan">🔗</div>
+          <h3>Token-Backed Infrastructure</h3>
+          <p>New tokens are only minted when verified compute capacity and storage are added. This creates a naturally deflationary, asset-backed token economy.</p>
+        </div>
+        <div class="card fade-in fade-in-delay-2">
+          <div class="card-icon amber">🧠</div>
+          <h3>AI Cost Optimization</h3>
+          <p>Our harness intelligently routes between ChatGPT, Gemini, Claude and open-source models like Gemma 4, Minimax, Qwen — minimizing token burn while maximizing output quality.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ ECOSYSTEM ════════ -->
+  <section class="section" id="ecosystem">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-label">Ecosystem</div>
+        <h2 class="section-title">One Platform, <span class="text-gradient">Five Products</span></h2>
+        <p class="section-subtitle">
+          An integrated suite of AI-powered tools and infrastructure — from developer kit to enterprise applications — all powered by a unified compute and token layer.
+        </p>
+      </div>
+
+      <!-- Flagship product -->
+      <div class="card fade-in" style="margin-bottom:24px; border-color: rgba(124,58,237,0.25); background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.05));">
+        <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+          <div class="card-icon purple" style="font-size:2rem; width:72px; height:72px; border-radius:18px;">🚀</div>
+          <div style="flex:1; min-width:280px;">
+            <span class="tag tag-beta" style="margin-bottom:12px;">Flagship · Alpha</span>
+            <h3 style="font-size:1.5rem; margin-top:8px;">OmniUltra Agent Kit</h3>
+            <p style="margin-top:8px;">Enterprise AI development toolkit that standardizes the entire SDLC. Think of it as the fusion of OpenCode CLI + Antigravity IDE + Claude Cowork — one tool, many purposes. Integrates multi-model orchestration (ChatGPT, Gemini, Claude, Gemma 4, Minimax, Qwen) with agentic workflows, code intelligence, and 1900+ expert skills.</p>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:16px;">
+              <span style="padding:4px 10px; border-radius:20px; background:rgba(255,255,255,0.05); font-size:0.75rem; color:var(--text-muted); border:1px solid var(--border-glass);">Agentic Coding</span>
+              <span style="padding:4px 10px; border-radius:20px; background:rgba(255,255,255,0.05); font-size:0.75rem; color:var(--text-muted); border:1px solid var(--border-glass);">Multi-Model</span>
+              <span style="padding:4px 10px; border-radius:20px; background:rgba(255,255,255,0.05); font-size:0.75rem; color:var(--text-muted); border:1px solid var(--border-glass);">CLI + IDE</span>
+              <span style="padding:4px 10px; border-radius:20px; background:rgba(255,255,255,0.05); font-size:0.75rem; color:var(--text-muted); border:1px solid var(--border-glass);">Enterprise</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core infra -->
+      <div class="grid-2" style="margin-bottom:24px;">
+        <div class="card fade-in">
+          <div class="card-icon cyan">💾</div>
+          <h3>Distributed Storage Engine</h3>
+          <p>High-performance decentralized storage optimized for AI workloads. Built as the backbone for all satellite applications — ensuring data sovereignty, resilience, and cost efficiency at scale.</p>
+          <span class="tag tag-dev">Core Infrastructure</span>
+        </div>
+        <div class="card fade-in fade-in-delay-1">
+          <div class="card-icon green">📊</div>
+          <h3>AI Financial Report Reader</h3>
+          <p>Enterprise financial data lakehouse with AI-driven knowledge extraction. Aggregates corporate reports, market data via Yahoo Finance and third-party APIs to build a proprietary terminal for both traditional and crypto markets.</p>
+          <span class="tag tag-beta">Alpha</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card fade-in">
+          <div class="card-icon pink">📋</div>
+          <h3>Resume AI</h3>
+          <p>AI-powered resume analysis and candidate matching. Uses hybrid model routing to deliver enterprise-grade HR intelligence at a fraction of the cost of pure-API solutions.</p>
+          <span class="tag tag-beta">Alpha</span>
+        </div>
+        <div class="card fade-in fade-in-delay-1">
+          <div class="card-icon amber">🌐</div>
+          <h3>InfiTrans — Multilingual Translation Platform</h3>
+          <p>Enterprise-grade document translation across 15 languages and 7 file formats. Two editions: Air-gapped Open Source (local LLM) and Cloud SaaS. Features format-preserving reconstruction, glossary enforcement, XLIFF exchange, and confidence-scored review.</p>
+          <span class="tag tag-beta">Beta</span>
+        </div>
+      </div>
+
+      <!-- Third row apps -->
+      <div class="grid-2" style="margin-top:24px;">
+        <div class="card fade-in">
+          <div class="card-icon cyan">🖥️</div>
+          <h3>ColimaUI</h3>
+          <p>Modern desktop & web GUI for Docker, Kubernetes, and Linux VMs. Features an AI Diagnostic Agent with a self-learning knowledge bank, built on Tauri v2, React 19, and Rust.</p>
+          <span class="tag tag-beta">Live v0.1.10</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TECHNOLOGY ════════ -->
+  <section class="section section-alt" id="technology">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-label">Architecture</div>
+        <h2 class="section-title">How the <span class="text-gradient">Stack Works</span></h2>
+        <p class="section-subtitle">A vertically integrated platform from bare metal to end-user application — each layer reinforcing the next.</p>
+      </div>
+
+      <div class="tech-stack fade-in">
+        <div class="tech-layer">
+          <div class="tech-layer-num" style="background:rgba(124,58,237,0.15); color:var(--purple-400);">5</div>
+          <div>
+            <h4>OmniUltra Agent Kit — Unified Management Layer</h4>
+            <p>Agentic CLI + IDE · Orchestrates all layers below · Evolves into a Unified App (IDE + MTC modes)</p>
+          </div>
+        </div>
+        <div class="tech-connector"></div>
+        <div class="tech-layer">
+          <div class="tech-layer-num" style="background:rgba(244,114,182,0.15); color:var(--pink-400);">4</div>
+          <div>
+            <h4>Application Layer</h4>
+            <p>Financial Reader · Resume AI · Translation Platform · ColimaUI · Future Apps</p>
+          </div>
+        </div>
+        <div class="tech-connector"></div>
+        <div class="tech-layer">
+          <div class="tech-layer-num" style="background:rgba(251,191,36,0.15); color:var(--amber-400);">3</div>
+          <div>
+            <h4>AI Harness & Model Router</h4>
+            <p>Multi-model orchestration — ChatGPT, Gemini, Claude, Gemma 4, Minimax, Qwen</p>
+          </div>
+        </div>
+        <div class="tech-connector"></div>
+        <div class="tech-layer">
+          <div class="tech-layer-num" style="background:rgba(6,182,212,0.15); color:var(--cyan-400);">2</div>
+          <div>
+            <h4>Storage Layer</h4>
+            <p>Distributed storage engine — decentralized, AI-optimized, fault-tolerant</p>
+          </div>
+        </div>
+        <div class="tech-connector"></div>
+        <div class="tech-layer">
+          <div class="tech-layer-num" style="background:rgba(74,222,128,0.15); color:var(--green-400);">1</div>
+          <div>
+            <h4>Compute Layer</h4>
+            <p>Centralized high-performance compute · GPU clusters · Token-gated capacity</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:40px;">
+        <div class="fade-in" style="display:inline-flex; gap:8px; align-items:center; padding:8px 20px; border-radius:999px; background:rgba(74,222,128,0.08); border:1px solid rgba(74,222,128,0.2); font-size:0.85rem; color:var(--green-400);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Token minting is gated by verified compute &amp; storage capacity
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TOKENOMICS ════════ -->
+  <section class="section" id="tokenomics">
+    <div class="container">
+      <div class="section-header fade-in">
+        <div class="section-label">Token Economy</div>
+        <h2 class="section-title"><span class="text-gradient">Asset-Backed</span> Tokenomics</h2>
+        <p class="section-subtitle">Our token replaces traditional credits for AI services. New tokens are only minted when real compute and storage capacity is added to the network.</p>
+      </div>
+
+      <div class="tokenomics-grid fade-in">
+        <!-- Left: features -->
+        <div>
+          <div class="token-feature">
+            <div class="token-feature-icon">🔒</div>
+            <div>
+              <h4>Asset-Backed Issuance</h4>
+              <p>Tokens are only minted when verified compute capacity and storage are added. No arbitrary inflation — every token has real infrastructure behind it.</p>
+            </div>
+          </div>
+          <div class="token-feature">
+            <div class="token-feature-icon">💳</div>
+            <div>
+              <h4>Utility-First Design</h4>
+              <p>Tokens are credits for AI services on the platform — inference, training, storage, translation, document analysis. Real utility creates real demand.</p>
+            </div>
+          </div>
+          <div class="token-feature">
+            <div class="token-feature-icon">🔥</div>
+            <div>
+              <h4>Auto-Burn Rewards</h4>
+              <p>Bonus tokens given to committed Round 1 participants are marked and automatically burned upon use. This controlled inflation self-corrects over time.</p>
+            </div>
+          </div>
+          <div class="token-feature">
+            <div class="token-feature-icon">📅</div>
+            <div>
+              <h4>Commitment-Based Fundraising</h4>
+              <p>Investors commit to monthly installments. Full completion unlocks bonus tokens from a fixed pool. Early exit returns 50% with a scheduled refund date.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: highlight card -->
+        <div class="card" style="border-color: rgba(124,58,237,0.2); background:linear-gradient(160deg, rgba(124,58,237,0.06), rgba(6,182,212,0.04));">
+          <h3 style="margin-bottom:24px;">Round 1 — Now Open</h3>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="display:flex; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid var(--border-glass);">
+              <span style="color:var(--text-muted); font-size:0.9rem;">Token Backing</span>
+              <span style="font-weight:600; color:var(--green-400);">100% Compute + Storage</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid var(--border-glass);">
+              <span style="color:var(--text-muted); font-size:0.9rem;">Reward Mechanism</span>
+              <span style="font-weight:600;">Fixed Bonus Pool</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid var(--border-glass);">
+              <span style="color:var(--text-muted); font-size:0.9rem;">Bonus Token Fate</span>
+              <span style="font-weight:600; color:var(--rose-500);">Burned on Use</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid var(--border-glass);">
+              <span style="color:var(--text-muted); font-size:0.9rem;">Early Exit Penalty</span>
+              <span style="font-weight:600;">50% — Refund Scheduled</span>
+            </div>
+            <div style="display:flex; justify-content:space-between;">
+              <span style="color:var(--text-muted); font-size:0.9rem;">Future Rounds</span>
+              <span style="font-weight:600; color:var(--text-muted);">TBD by Company</span>
+            </div>
+          </div>
+          <div style="margin-top:24px; padding:16px; border-radius:12px; background:rgba(74,222,128,0.06); border:1px solid rgba(74,222,128,0.15);">
+            <p style="font-size:0.85rem; color:var(--green-400); text-align:center;">
+              🛡️ Anti-inflation guarantee: Bonus tokens are marked and burned upon platform use
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CONTACT CTA ════════ -->
+  <section class="cta-section section-alt" id="contact">
+    <div class="container">
+      <div class="cta-card fade-in">
+        <h3>Ready to <span class="text-gradient">Build Together</span>?</h3>
+        <p>Whether you're an investor, partner, or developer — we'd love to hear from you.</p>
+        <a href="mailto:office@infiniteagentlabs.com" class="cta-email">office@infiniteagentlabs.com</a>
+        <a href="mailto:office@infiniteagentlabs.com" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Send Us an Email
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/logo.png" alt="Logo" />
+          <span>Infinite Agent Labs</span>
+        </div>
+        <div class="footer-links">
+          <a href="#vision">Vision</a>
+          <a href="#ecosystem">Ecosystem</a>
+          <a href="#tokenomics">Tokenomics</a>
+          <a href="mailto:office@infiniteagentlabs.com">Contact</a>
+        </div>
+        <div class="footer-copy">
+          © 2025 Infinite Agent Labs. Built with 🚀 in Vietnam.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /content-wrapper -->
+
+<script src="js/main.js"></script>
+</body>
 </html>

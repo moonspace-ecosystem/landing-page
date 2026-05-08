@@ -1,80 +1,58 @@
-# Moonspace - Financial Intelligence Platform
+# Infinite Agent Labs — Landing Page
 
-A landing page for Moonspace, an AI-powered platform that automatically converts Australian corporate financial reports to IFRS and US GAAP standards.
+The official website for **Infinite Agent Labs** — a Web3 + AI startup building centralized compute infrastructure and decentralized storage for the AI era.
+
+🌐 **Live at**: [infiniteagentlabs.com](https://infiniteagentlabs.com)
 
 ## Tech Stack
 
-- **BunJS** - JavaScript runtime and toolkit
-- **ReactJS** - UI library
-- **Effect.website** - Functional programming library for handling side effects
-- **TailwindCSS** - Utility-first CSS framework
-- **TypeScript** - Type safety
+- **Pure HTML/CSS/JS** — zero dependencies, zero build step
+- **Inter** font (Google Fonts)
+- **Canvas API** for particle background
+- **Intersection Observer** for scroll animations
 
-## Prerequisites
+## Deployment
 
-- [Bun](https://bun.sh/) installed on your machine
+This is a static site deployed on **Cloudflare Pages**.
 
-## Getting Started
+### Deploy to Cloudflare Pages
 
-1. Clone the repository:
+1. Go to [Cloudflare Dashboard](https://dash.cloudflare.com/) → Pages
+2. Create a project → Connect to Git or Direct Upload
+3. Configuration:
+   - **Build command**: _(leave empty — no build needed)_
+   - **Build output directory**: `/` (root)
+4. Set custom domain: `infiniteagentlabs.com`
 
-```bash
-git clone https://github.com/yourusername/moonspace-landing.git
-cd moonspace-landing
-```
+### Local Development
 
-2. Install dependencies:
-
-```bash
-bun install
-```
-
-3. Start the development server:
+Simply open `index.html` in a browser, or use a local server:
 
 ```bash
-bun run dev
+# Using Python
+python3 -m http.server 8080
+
+# Using Node.js
+npx serve .
 ```
-
-4. Open [http://localhost:5173](http://localhost:5173) in your browser to see the application.
-
-## Building for Production
-
-```bash
-bun run build
-```
-
-The build artifacts will be stored in the `dist/` directory.
 
 ## Project Structure
 
 ```
-moonspace/
-├── src/
-│   ├── config/
-│   │   └── appConfig.ts       # Application configuration
-│   ├── components/            # React components
-│   ├── effects/               # Effect-based side effects
-│   ├── hooks/                 # Custom React hooks
-│   ├── types/                 # TypeScript type definitions
-│   ├── App.tsx                # Main App component
-│   └── main.tsx               # Entry point
-├── public/                    # Static assets
-├── index.html                 # HTML template
-└── package.json               # Project dependencies and scripts
+├── index.html          # Single-page landing
+├── css/
+│   └── style.css       # Design system
+├── js/
+│   └── main.js         # Animations & interactions
+├── assets/
+│   └── logo.png        # Company logo
+├── _headers            # Cloudflare Pages headers
+├── _redirects           # Cloudflare Pages redirects
+└── legacy/             # Archived old Qwik codebase
 ```
 
-## Key Features
+## Contact
 
-- **Functional Programming** with Effect.website for managing side effects
-- **Type Safety** with TypeScript
-- **Performance** with BunJS
-- **Responsive Design** with TailwindCSS
-- **Component-Based Architecture** with React
+📧 **office@infiniteagentlabs.com**
 
-## Environment Variables
-
-In a production environment, you should set up environment variables for sensitive configuration. The application is designed to read configuration from environment variables with fallbacks to the default values.
-
-## License
-
-[MIT](LICENSE)
+© 2025 Infinite Agent Labs. Built with 🚀 in Vietnam.
