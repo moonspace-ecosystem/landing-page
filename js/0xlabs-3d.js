@@ -1,15 +1,24 @@
-/* 0xLabs 3D Logo — Spline Runtime (centered programmatically via Camera & Object) */
+/* 0xLabs 3D Logo — Spline Runtime (large canvas, scaled & cropped perfectly) */
 (function () {
   const el = document.getElementById('oxlabs-3d');
   if (!el) return;
 
   const wrapper = document.createElement('div');
   wrapper.id = 'oxlabs-3d';
-  wrapper.style.cssText = 'width:64px;height:64px;position:relative;border-radius:12px;flex-shrink:0;overflow:hidden;background:#1a1a2e;';
+  wrapper.style.cssText = 'width:64px;height:64px;overflow:hidden;position:relative;border-radius:12px;flex-shrink:0;';
 
   const canvas = document.createElement('canvas');
-  // Make the canvas fill the wrapper. Spline will adjust its camera aspect ratio.
-  canvas.style.cssText = 'width:100%;height:100%;display:block;outline:none;';
+  // Make the canvas huge to prevent any clipping from the canvas edges
+  canvas.width = 800;
+  canvas.height = 800;
+  
+  // Object is at ~70% left, ~45% top in the Spline scene.
+  // We use transform to scale it down, then translate it to center the object.
+  // With width:800px and scale(0.18):
+  // visual canvas size = 144px.
+  // object center X ~ 144 * 0.7 = 100.8px. To center in 64px (target 32), we shift left by ~68px.
+  // object center Y ~ 144 * 0.45 = 64.8px. To center in 64px (target 32), we shift up by ~32px.
+  canvas.style.cssText = 'width:800px;height:800px;display:block;position:absolute;top:-30px;left:-66px;transform-origin:0 0;transform:scale(0.18);pointer-events:none;';
   wrapper.appendChild(canvas);
 
   el.parentNode.replaceChild(wrapper, el);
@@ -21,33 +30,9 @@
     const c = document.querySelector('#oxlabs-3d canvas');
     const app = new Application(c);
     
-    app.load('/assets/0xlabs-scene.splinecode').then(() => {
-      // Find all objects
-      const objects = app.getObjects();
-      
-      // The 3D cross shape might be named 'Cube 2' or 'Shape'
-      const crossObj = objects.find(o => o.name === 'Cube 2' || o.type === 'Mesh');
-      if (crossObj) {
-        // Try to center it in world space
-        crossObj.position.x = 0;
-        crossObj.position.y = 0;
-      }
-
-      // Spline scenes often have a camera that is panned or zoomed strangely.
-      // Let's reset the active camera's position to look straight at the origin.
-      if (app._camera) {
-        // A typical perspective camera setup:
-        app._camera.position.x = 0;
-        app._camera.position.y = 0;
-        // Keep the existing Z (distance to object) or set a reasonable one
-        if (app._camera.position.z > 2000 || app._camera.position.z < 10) {
-            app._camera.position.z = 800; // default safe distance
-        }
-      }
-      
-      // If we want to adjust the zoom dynamically to fit the 64x64 box
-      app.setZoom(0.8); // Zoom out slightly to ensure it's not cut off
-    });
+    // We do NOT manipulate the 3D scene objects programmatically to avoid pivot/cutoff issues.
+    // We let it render naturally, and just CSS-crop the specific part we want.
+    app.load('/assets/0xlabs-scene.splinecode');
   `;
   document.body.appendChild(mod);
 })();
